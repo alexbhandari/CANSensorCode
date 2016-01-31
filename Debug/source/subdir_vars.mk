@@ -3,6 +3,9 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../source/classes.cpp 
+
 CMD_SRCS += \
 ../source/sys_link.cmd 
 
@@ -51,6 +54,7 @@ OBJS += \
 ./source/adc.obj \
 ./source/adc_support.obj \
 ./source/can.obj \
+./source/classes.obj \
 ./source/dabort.obj \
 ./source/esm.obj \
 ./source/gio.obj \
@@ -76,10 +80,14 @@ ASM_DEPS += \
 ./source/sys_mpu.pp \
 ./source/sys_pmu.pp 
 
+CPP_DEPS += \
+./source/classes.pp 
+
 OBJS__QUOTED += \
 "source/adc.obj" \
 "source/adc_support.obj" \
 "source/can.obj" \
+"source/classes.obj" \
 "source/dabort.obj" \
 "source/esm.obj" \
 "source/gio.obj" \
@@ -115,6 +123,9 @@ C_DEPS__QUOTED += \
 "source/sys_vim.pp" \
 "source/system.pp" 
 
+CPP_DEPS__QUOTED += \
+"source/classes.pp" 
+
 ASM_DEPS__QUOTED += \
 "source/dabort.pp" \
 "source/sys_core.pp" \
@@ -138,6 +149,9 @@ C_SRCS__QUOTED += \
 "../source/sys_startup.c" \
 "../source/sys_vim.c" \
 "../source/system.c" 
+
+CPP_SRCS__QUOTED += \
+"../source/classes.cpp" 
 
 ASM_SRCS__QUOTED += \
 "../source/dabort.asm" \

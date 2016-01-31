@@ -24,6 +24,13 @@ source/can.obj: ../source/can.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Finished building: $<'
 	@echo ' '
 
+source/classes.obj: ../source/classes.cpp $(GEN_OPTS) $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM Compiler'
+	"/Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/bin/armcl" -mv7R4 --code_state=32 --abi=eabi -me --include_path="/Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include" --include_path="/Users/alexbhandari/Documents/eagle/CAN_example/include" -g --display_error_number --diag_warning=225 --diag_wrap=off --enum_type=packed --printf_support=full --preproc_with_compile --preproc_dependency="source/classes.pp" --obj_directory="source" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
 source/dabort.obj: ../source/dabort.asm $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM Compiler'

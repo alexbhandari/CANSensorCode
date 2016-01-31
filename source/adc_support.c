@@ -5,7 +5,32 @@
  *      Author: alexbhandari
  */
 
-#include "adc.h"
+#include "adc_support.h"
+
+/**
+ * @fn int adc_conversion_helper(uint16_t channel)
+ * @brief Runs an ADC conversion and prints the result
+ */
+int adc_conversion_helper(uint16_t channel) {
+	adcData_t adc_data;
+	adcData_t *adc_data_ptr = &adc_data;
+
+ 	/** - Start Group1 ADC Conversion
+ 	*     Select Channel
+ 	*/
+	adcStartConversion_selChn(adcREG1, channel, 1, adcGROUP1);
+
+ 	/** - Wait for ADC Group1 conversion to complete */
+ 	while(!adcIsConversionComplete(adcREG1, adcGROUP1));
+
+	/** - Read the conversion result
+	*     The data contains the Ambient Light sensor data
+    */
+	int count = 0;
+	adcGetSingleData(adcREG1, adcGROUP1, adc_data_ptr);
+	printf("data: %d. Count: %d\r\n",adc_data_ptr->value,count);
+	return count;
+}
 
 /** @fn void adcGetSingleData(adcBASE_t *adc, unsigned group, adcData_t *data)
 *   @brief Get single converted ADC value

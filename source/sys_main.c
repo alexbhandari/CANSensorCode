@@ -141,16 +141,15 @@ void main(void)
 
 	//ADC stuff
 	adcInit();
-	//while(1) {
-		//adcStartConversion(adcREG1, adcGROUP0);
-		adcStartConversion_selChn(adcREG1, 9U, 1, adcGROUP1);
-		while(!adcIsConversionComplete(adcREG1, adcGROUP1));
-		adcData_t adc_data;
-		adcData_t *adc_data_ptr = &adc_data;
-		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
-		printf("data: %d. Count: %d\r\n",adc_data,count);
-	//}
-
+//		adcStartConversion_selChn(adcREG1, 9U, 1, adcGROUP1);
+//		while(!adcIsConversionComplete(adcREG1, adcGROUP1));
+//		adcData_t adc_data;
+//		adcData_t *adc_data_ptr = &adc_data;
+//		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
+//		printf("data: %d. Count: %d\r\n",adc_data,count);
+	while(1){
+	adc_conversion_helper(9U);
+	}
 
     exit(0);
 /* USER CODE END */
@@ -174,13 +173,13 @@ void dumpSomeData()
 }
 
 //sciSend text method
-void sciSendText(char * string) {
-  unsigned int value = (unsigned int)*tx_ptr;
-  char buffer[8];
-  unsigned int num_char = ltoa(value,(char *)buffer);
-  sciSend(scilinREG, 14, (unsigned char *)"Transmitting: ");
-  sciSend(scilinREG, 1, (unsigned char *)*tx_ptr);
-}
+//void sciSendText(char * string) {
+//  unsigned int value = (unsigned int)*tx_ptr;
+//  char buffer[8];
+//  unsigned int num_char = ltoa(value,(char *)buffer);
+//  sciSend(scilinREG, 14, (unsigned char *)"Transmitting: ");
+//  sciSend(scilinREG, 1, (unsigned char *)*tx_ptr);
+//}
 
 /* can interrupt notification */
 /* Note-You need to remove canMessageNotification from notification.c to avoid redefinition */

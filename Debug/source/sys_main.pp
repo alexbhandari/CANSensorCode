@@ -25,6 +25,7 @@ source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/gio
 source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdio.h
 source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdarg.h
 source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/adc_support.h
+source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdio.h
 
 ../source/sys_main.c: 
 /Users/alexbhandari/Documents/eagle/CAN_example/include/sys_common.h: 
@@ -51,3 +52,4 @@ source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/adc
 /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdio.h: 
 /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdarg.h: 
 /Users/alexbhandari/Documents/eagle/CAN_example/include/adc_support.h: 
+/Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdio.h: 

@@ -8,7 +8,11 @@
 #ifndef INCLUDE_ADC_SUPPORT_H_
 #define INCLUDE_ADC_SUPPORT_H_
 
+#include "adc.h"
+#include "stdio.h"
+
 /* ADC Interface Functions */
+int adc_conversion_helper(uint16_t channel);
 void adcGetSingleData(adcBASE_t *adc, unsigned group, adcData_t *data);
 void adcStartConversion_selChn(adcBASE_t *adc, unsigned channel, unsigned fifo_size, unsigned group);
 
