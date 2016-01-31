@@ -11,7 +11,38 @@
  * @fn int adc_conversion_helper(uint16_t channel)
  * @brief Runs an ADC conversion and prints the result
  */
-int adc_conversion_helper(uint16_t channel) {
+int adc_convert_all_channels() {
+	adcData_t adc_data;
+	adcData_t *adc_data_ptr = &adc_data;
+
+ 	/** - Start Group1 ADC Conversion
+ 	*     Select Channel
+ 	*/
+	printf("Converting:");
+	int i;
+	for(i = 1U; i <= 16U; i++) {
+		adcStartConversion_selChn(adcREG1, 1U, 1, adcGROUP1);
+		printf(" %d",i);
+	}
+	printf("\r\n");
+
+ 	/** - Wait for ADC Group1 conversion to complete */
+ 	while(!adcIsConversionComplete(adcREG1, adcGROUP1));
+
+	/** - Read the conversion result
+	*     The data contains the Ambient Light sensor data
+    */
+	int count = 0;
+	count = adcGetData(adcREG1, adcGROUP1, adc_data_ptr);
+	printf("data: %d. id: %d. Count: %d\r\n",adc_data_ptr->value,adc_data_ptr->id,count);
+	return count;
+}
+
+/**
+ * @fn int adc_conversion_helper(uint16_t channel)
+ * @brief Runs an ADC conversion and prints the result
+ */
+int adc_convert_channel(uint16_t channel) {
 	adcData_t adc_data;
 	adcData_t *adc_data_ptr = &adc_data;
 

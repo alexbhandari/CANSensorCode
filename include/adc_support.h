@@ -12,7 +12,8 @@
 #include "stdio.h"
 
 /* ADC Interface Functions */
-int adc_conversion_helper(uint16_t channel);
+int adc_convert_all_channels();
+int adc_convert_channel(uint16_t channel);
 void adcGetSingleData(adcBASE_t *adc, unsigned group, adcData_t *data);
 void adcStartConversion_selChn(adcBASE_t *adc, unsigned channel, unsigned fifo_size, unsigned group);
 

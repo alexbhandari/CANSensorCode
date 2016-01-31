@@ -148,7 +148,7 @@ void main(void)
 //		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
 //		printf("data: %d. Count: %d\r\n",adc_data,count);
 	while(1){
-	adc_conversion_helper(9U);
+	adc_convert_all_channels();
 	}
 
     exit(0);
