@@ -50,18 +50,7 @@
 #include "sys_common.h"
 
 /* USER CODE BEGIN (1) */
-#include "can.h"
-#include "esm.h"
-#include "sys_core.h"
-#include "sci.h"
-#include "stdlib.h"
-#include "adc.h"
-#include "gio.h"
-#include <stdio.h>
-
-#include "adc_support.h"
-
-#define D_COUNT  8
+#include "main.h"
 
 uint32 cnt=0, error =0, tx_done =0;
 uint8 tx_data[D_COUNT][8] = {0,1,2,3,4,5,6,7};

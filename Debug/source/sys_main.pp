@@ -9,6 +9,7 @@ source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/incl
 source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdarg.h
 source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/linkage.h
 source/sys_main.obj: /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/_lock.h
+source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/main.h
 source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/can.h
 source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/reg_can.h
 source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/esm.h
@@ -34,6 +35,7 @@ source/sys_main.obj: /Users/alexbhandari/Documents/eagle/CAN_example/include/adc
 /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/stdarg.h: 
 /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/linkage.h: 
 /Applications/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.5/include/_lock.h: 
+/Users/alexbhandari/Documents/eagle/CAN_example/include/main.h: 
 /Users/alexbhandari/Documents/eagle/CAN_example/include/can.h: 
 /Users/alexbhandari/Documents/eagle/CAN_example/include/reg_can.h: 
 /Users/alexbhandari/Documents/eagle/CAN_example/include/esm.h: 
