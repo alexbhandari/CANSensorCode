@@ -9,18 +9,10 @@
 #define INCLUDE_MAIN_H_
 
 /* ti libraries */
-#include "can.h"
-#include "esm.h"
 #include "sys_core.h"
-#include "sci.h"
-#include "stdlib.h"
-#include "adc.h"
-#include "gio.h"
-#include <stdio.h>
 
 /* custom libraries */
 #include "adc_support.h"
-
-#define D_COUNT  8
+#include "can_support.h"
 
 #endif /* INCLUDE_MAIN_H_ */

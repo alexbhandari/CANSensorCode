@@ -20,6 +20,7 @@ C_SRCS += \
 ../source/adc.c \
 ../source/adc_support.c \
 ../source/can.c \
+../source/can_support.c \
 ../source/esm.c \
 ../source/gio.c \
 ../source/notification.c \
@@ -37,6 +38,7 @@ C_DEPS += \
 ./source/adc.pp \
 ./source/adc_support.pp \
 ./source/can.pp \
+./source/can_support.pp \
 ./source/esm.pp \
 ./source/gio.pp \
 ./source/notification.pp \
@@ -54,6 +56,7 @@ OBJS += \
 ./source/adc.obj \
 ./source/adc_support.obj \
 ./source/can.obj \
+./source/can_support.obj \
 ./source/classes.obj \
 ./source/dabort.obj \
 ./source/esm.obj \
@@ -87,6 +90,7 @@ OBJS__QUOTED += \
 "source/adc.obj" \
 "source/adc_support.obj" \
 "source/can.obj" \
+"source/can_support.obj" \
 "source/classes.obj" \
 "source/dabort.obj" \
 "source/esm.obj" \
@@ -110,6 +114,7 @@ C_DEPS__QUOTED += \
 "source/adc.pp" \
 "source/adc_support.pp" \
 "source/can.pp" \
+"source/can_support.pp" \
 "source/esm.pp" \
 "source/gio.pp" \
 "source/notification.pp" \
@@ -137,6 +142,7 @@ C_SRCS__QUOTED += \
 "../source/adc.c" \
 "../source/adc_support.c" \
 "../source/can.c" \
+"../source/can_support.c" \
 "../source/esm.c" \
 "../source/gio.c" \
 "../source/notification.c" \

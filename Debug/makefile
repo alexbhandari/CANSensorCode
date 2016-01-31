@@ -11,6 +11,7 @@ ORDERED_OBJS += \
 "./source/adc.obj" \
 "./source/adc_support.obj" \
 "./source/can.obj" \
+"./source/can_support.obj" \
 "./source/classes.obj" \
 "./source/dabort.obj" \
 "./source/esm.obj" \
@@ -167,8 +168,8 @@ CAN_example.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "source/adc.obj" "source/adc_support.obj" "source/can.obj" "source/classes.obj" "source/dabort.obj" "source/esm.obj" "source/gio.obj" "source/notification.obj" "source/pinmux.obj" "source/sci.obj" "source/sys_core.obj" "source/sys_intvecs.obj" "source/sys_main.obj" "source/sys_mpu.obj" "source/sys_pcr.obj" "source/sys_phantom.obj" "source/sys_pmu.obj" "source/sys_selftest.obj" "source/sys_startup.obj" "source/sys_vim.obj" "source/system.obj" 
-	-$(RM) "source/adc.pp" "source/adc_support.pp" "source/can.pp" "source/esm.pp" "source/gio.pp" "source/notification.pp" "source/pinmux.pp" "source/sci.pp" "source/sys_main.pp" "source/sys_pcr.pp" "source/sys_phantom.pp" "source/sys_selftest.pp" "source/sys_startup.pp" "source/sys_vim.pp" "source/system.pp" 
+	-$(RM) "source/adc.obj" "source/adc_support.obj" "source/can.obj" "source/can_support.obj" "source/classes.obj" "source/dabort.obj" "source/esm.obj" "source/gio.obj" "source/notification.obj" "source/pinmux.obj" "source/sci.obj" "source/sys_core.obj" "source/sys_intvecs.obj" "source/sys_main.obj" "source/sys_mpu.obj" "source/sys_pcr.obj" "source/sys_phantom.obj" "source/sys_pmu.obj" "source/sys_selftest.obj" "source/sys_startup.obj" "source/sys_vim.obj" "source/system.obj" 
+	-$(RM) "source/adc.pp" "source/adc_support.pp" "source/can.pp" "source/can_support.pp" "source/esm.pp" "source/gio.pp" "source/notification.pp" "source/pinmux.pp" "source/sci.pp" "source/sys_main.pp" "source/sys_pcr.pp" "source/sys_phantom.pp" "source/sys_selftest.pp" "source/sys_startup.pp" "source/sys_vim.pp" "source/system.pp" 
 	-$(RM) "source/classes.pp" 
 	-$(RM) "source/dabort.pp" "source/sys_core.pp" "source/sys_intvecs.pp" "source/sys_mpu.pp" "source/sys_pmu.pp" 
 	-@echo 'Finished clean'
