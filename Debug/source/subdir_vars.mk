@@ -15,6 +15,7 @@ ASM_SRCS += \
 
 C_SRCS += \
 ../source/adc.c \
+../source/adc_support.c \
 ../source/can.c \
 ../source/esm.c \
 ../source/gio.c \
@@ -31,6 +32,7 @@ C_SRCS += \
 
 C_DEPS += \
 ./source/adc.pp \
+./source/adc_support.pp \
 ./source/can.pp \
 ./source/esm.pp \
 ./source/gio.pp \
@@ -47,6 +49,7 @@ C_DEPS += \
 
 OBJS += \
 ./source/adc.obj \
+./source/adc_support.obj \
 ./source/can.obj \
 ./source/dabort.obj \
 ./source/esm.obj \
@@ -75,6 +78,7 @@ ASM_DEPS += \
 
 OBJS__QUOTED += \
 "source/adc.obj" \
+"source/adc_support.obj" \
 "source/can.obj" \
 "source/dabort.obj" \
 "source/esm.obj" \
@@ -96,6 +100,7 @@ OBJS__QUOTED += \
 
 C_DEPS__QUOTED += \
 "source/adc.pp" \
+"source/adc_support.pp" \
 "source/can.pp" \
 "source/esm.pp" \
 "source/gio.pp" \
@@ -119,6 +124,7 @@ ASM_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../source/adc.c" \
+"../source/adc_support.c" \
 "../source/can.c" \
 "../source/esm.c" \
 "../source/gio.c" \

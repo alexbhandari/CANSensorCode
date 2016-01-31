@@ -59,6 +59,8 @@
 #include "gio.h"
 #include <stdio.h>
 
+#include "adc_support.h"
+
 #define D_COUNT  8
 
 uint32 cnt=0, error =0, tx_done =0;
@@ -149,13 +151,14 @@ void main(void)
 
 
 	//ADC stuff
+	adcInit();
 	//while(1) {
-		adcStartConversion(adcREG1, 1U);
-		//adcStartConversion_selChn(adcREG1, 9U, 1, adcGROUP1);
+		//adcStartConversion(adcREG1, adcGROUP0);
+		adcStartConversion_selChn(adcREG1, 9U, 1, adcGROUP1);
 		while(!adcIsConversionComplete(adcREG1, adcGROUP1));
 		adcData_t adc_data;
 		adcData_t *adc_data_ptr = &adc_data;
-		int count = adcGetData(adcREG1,adcGROUP0,adc_data_ptr);
+		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
 		printf("data: %d. Count: %d\r\n",adc_data,count);
 	//}
 
