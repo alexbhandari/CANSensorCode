@@ -101,8 +101,9 @@ void main(void)
 //		printf("data: %d. Count: %d\r\n",adc_data,count);
 	while(1){
 		int i;
-		for(i = 1U; i < 17U; i++) {
-			adc_convert_channel(i);
+		int AD_CHANNELS[16] = {0U,1U,2U,3U,4U,5U,6U,7U,8U,9U,10U,11U,16U,17U,20U,21U};
+		for(i = 0U; i < sizeof(AD_CHANNELS)/sizeof(AD_CHANNELS[0]); i++) {
+			adc_convert_channel(AD_CHANNELS[i]);
 		}
 	}
 
