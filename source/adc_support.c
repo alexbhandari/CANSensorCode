@@ -11,7 +11,7 @@
  * @fn int adc_conversion_helper(uint16_t channel)
  * @brief Runs an ADC conversion and prints the result
  */
-int adc_convert_all_channels() {
+int adc_convert_all_channels() { //NOT WORKING
 	adcData_t adc_data;
 	adcData_t *adc_data_ptr = &adc_data;
 
@@ -34,7 +34,7 @@ int adc_convert_all_channels() {
     */
 	int count = 0;
 	count = adcGetData(adcREG1, adcGROUP1, adc_data_ptr);
-	printf("data: %d. id: %d. Count: %d\r\n",adc_data_ptr->value,adc_data_ptr->id,count);
+	printf("data: %d. voltage: %f. id: %d. Count: %d\r\n",adc_data_ptr->value,decode_12_bit(adc_data_ptr->value),adc_data_ptr->id,count);
 	return count;
 }
 
@@ -59,7 +59,7 @@ int adc_convert_channel(uint16_t channel) {
     */
 	int count = 0;
 	adcGetSingleData(adcREG1, adcGROUP1, adc_data_ptr);
-	printf("data: %d. Count: %d\r\n",adc_data_ptr->value,count);
+	printf("channel: %d. data: %d. voltage: %f. id: %d. Count: %d\r\n",channel,adc_data_ptr->value,decode_12_bit(adc_data_ptr->value),adc_data_ptr->id,count);
 	return count;
 }
 
@@ -115,4 +115,13 @@ void adcStartConversion_selChn(adcBASE_t *adc, unsigned channel, unsigned fifo_s
 
     /** - Start Conversion */
     adc->GxSEL[group] = 1 << channel;
+}
+
+float decode_10_bit(int value)
+{
+	return (value*(AD_REF_HIGH - AD_REF_LOW) + 0.5F)/1024U + AD_REF_LOW;
+}
+float decode_12_bit(int value)
+{
+	return ( value * ( AD_REF_HIGH - AD_REF_LOW ) + 0.5F ) / 4096U + AD_REF_LOW;
 }

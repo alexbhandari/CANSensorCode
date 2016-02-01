@@ -100,7 +100,10 @@ void main(void)
 //		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
 //		printf("data: %d. Count: %d\r\n",adc_data,count);
 	while(1){
-		adc_convert_all_channels();
+		int i;
+		for(i = 1U; i < 17U; i++) {
+			adc_convert_channel(i);
+		}
 	}
 
     //exit(0);
