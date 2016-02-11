@@ -12,19 +12,10 @@
  * @brief Runs an ADC conversion and prints the result
  */
 int adc_convert_all_channels() { //NOT WORKING
-	adcData_t adc_data;
+	adcData_t adc_data[16];
 	adcData_t *adc_data_ptr = &adc_data;
 
- 	/** - Start Group1 ADC Conversion
- 	*     Select Channel
- 	*/
-	printf("Converting:");
-	int i;
-	for(i = 1U; i <= 16U; i++) {
-		adcStartConversion_selChn(adcREG1, 1U, 1, adcGROUP1);
-		printf(" %d",i);
-	}
-	printf("\r\n");
+	adcStartConversion(adcREG1, adcGROUP1);
 
  	/** - Wait for ADC Group1 conversion to complete */
  	while(!adcIsConversionComplete(adcREG1, adcGROUP1));
@@ -34,7 +25,18 @@ int adc_convert_all_channels() { //NOT WORKING
     */
 	int count = 0;
 	count = adcGetData(adcREG1, adcGROUP1, adc_data_ptr);
-	printf("data: %d. voltage: %f. id: %d. Count: %d\r\n",adc_data_ptr->value,decode_12_bit(adc_data_ptr->value),adc_data_ptr->id,count);
+	adcData_t *ptr = adc_data_ptr;
+	char str[1600];
+	//printf("data: %ld. voltage: %f. id: %ld. Count: %d\r\n",adc_data_ptr->value,adc_decode(adcREG1, adc_data_ptr->value),adc_data_ptr->id,count);
+	int i;
+	for(i = 9U; i < 10U; i++) {
+		uint16 id = adc_data[i].id;
+		unsigned int value = (unsigned int)adc_data[i].value;
+		adc_data_ptr++;
+		//printf("data: %ld. voltage: %f. id: %ld.\r\n", value, adc_decode(adcREG1, value), id);
+		//string_concat(str, " %d \r\n", adc_decode(value));
+	}
+	printf(str);
 	return count;
 }
 
@@ -42,9 +44,7 @@ int adc_convert_all_channels() { //NOT WORKING
  * @fn int adc_conversion_helper(uint16_t channel)
  * @brief Runs an ADC conversion and prints the result
  */
-int adc_convert_channel(uint16_t channel) {
-	adcData_t adc_data;
-	adcData_t *adc_data_ptr = &adc_data;
+int adc_convert_channel(uint16_t channel, adcData_t *adc_data_ptr) {
 
  	/** - Start Group1 ADC Conversion
  	*     Select Channel
@@ -59,7 +59,7 @@ int adc_convert_channel(uint16_t channel) {
     */
 	int count = 0;
 	adcGetSingleData(adcREG1, adcGROUP1, adc_data_ptr);
-	printf("channel: %d. data: %d. voltage: %f. id: %d. Count: %d\r\n",channel,adc_data_ptr->value,decode_12_bit(adc_data_ptr->value),adc_data_ptr->id,count);
+	//printf("channel: %d. data: %d. voltage: %f. id: %d. Count: %d\r\n", channel, adc_data_ptr->value, adc_decode(adcREG1, adc_data_ptr->value), adc_data_ptr->id, count);
 	return count;
 }
 
@@ -117,11 +117,24 @@ void adcStartConversion_selChn(adcBASE_t *adc, unsigned channel, unsigned fifo_s
     adc->GxSEL[group] = 1 << channel;
 }
 
-float decode_10_bit(int value)
+float adc_decode(adcBASE_t *adc, int value)
 {
-	return (value*(AD_REF_HIGH - AD_REF_LOW) + 0.5F)/1024U + AD_REF_LOW;
+	uint32 mode = (adc->OPMODECR & ADC_12_BIT_MODE);
+	int divisions = 1024U;
+	if(mode == ADC_12_BIT_MODE) {
+		divisions = 4096U;
+	}
+	return (value*(AD_REF_HIGH - AD_REF_LOW) + 0.5F)/divisions + AD_REF_LOW;
 }
-float decode_12_bit(int value)
+
+void string_concat(char* str1, const char* format, ...)
 {
-	return ( value * ( AD_REF_HIGH - AD_REF_LOW ) + 0.5F ) / 4096U + AD_REF_LOW;
+    char       str2[100];
+    va_list    args;
+
+    va_start(args, format);
+    vsnprintf(str2, sizeof(str2), format, args); // do check return value
+    va_end(args);
+
+    strcat(str1,str2);
 }

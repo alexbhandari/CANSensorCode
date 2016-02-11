@@ -1,4 +1,4 @@
-/** @file sys_main.c 
+/** @file sys_main.c
 *   @brief Application main file
 *   @date 28.Aug.2015
 *   @version 04.05.01
@@ -7,36 +7,36 @@
 *   which can be used for the application.
 */
 
-/* 
-* Copyright (C) 2009-2015 Texas Instruments Incorporated - www.ti.com 
-* 
-* 
-*  Redistribution and use in source and binary forms, with or without 
-*  modification, are permitted provided that the following conditions 
+/*
+* Copyright (C) 2009-2015 Texas Instruments Incorporated - www.ti.com
+*
+*
+*  Redistribution and use in source and binary forms, with or without
+*  modification, are permitted provided that the following conditions
 *  are met:
 *
-*    Redistributions of source code must retain the above copyright 
+*    Redistributions of source code must retain the above copyright
 *    notice, this list of conditions and the following disclaimer.
 *
 *    Redistributions in binary form must reproduce the above copyright
-*    notice, this list of conditions and the following disclaimer in the 
-*    documentation and/or other materials provided with the   
+*    notice, this list of conditions and the following disclaimer in the
+*    documentation and/or other materials provided with the
 *    distribution.
 *
 *    Neither the name of Texas Instruments Incorporated nor the names of
 *    its contributors may be used to endorse or promote products derived
 *    from this software without specific prior written permission.
 *
-*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-*  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+*  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-*  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-*  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-*  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
+*  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+*  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+*  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
 *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
 *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-*  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-*  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+*  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+*  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *
 */
@@ -99,14 +99,42 @@ void main(void)
 //		adcData_t *adc_data_ptr = &adc_data;
 //		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
 //		printf("data: %d. Count: %d\r\n",adc_data,count);
-	while(1){
+	adcData_t adc_data[16];
+	adcData_t *ptr = &adc_data;
+//	char output[500];
+	int j;
+	while(1) {
+	for(j=0U;j<15000;j++){
+//		int j;
+//		for(j = 0;j<20;j++){
 		int i;
 		int AD_CHANNELS[16] = {0U,1U,2U,3U,4U,5U,6U,7U,8U,9U,10U,11U,16U,17U,20U,21U};
 		for(i = 0U; i < sizeof(AD_CHANNELS)/sizeof(AD_CHANNELS[0]); i++) {
-			adc_convert_channel(AD_CHANNELS[i]);
+			adc_convert_channel(AD_CHANNELS[i], ptr);
+			ptr ++;
 		}
-	}
+//		adc_convert_all_channels();
+//		//printf("base: %d\r\n",&adc_data);
+//		//printf("prt:  %d\r\n",ptr);
+//		ptr = &adc_data;
+//		for(i = 0U; i < sizeof(AD_CHANNELS)/sizeof(AD_CHANNELS[0]); i++) {
+//			int id = ptr->id;
+//			int value = ptr->value;
+//			ptr++;
+//			//printf("address: %d\r\n",&ptr);
+//			//printf("data: %ld. voltage: %f. id: %ld.\r\n", value, adc_decode(adcREG1, value), id);
+//			strcat(output, " ");
+//			strcat(output, value);
+//			strcat(output, " ");
+//		}
+//		strcat(output,"\r\n");
+//		}
+//		printf(output);
 
+	}
+	j++;
+	printf("hi");
+	}
     //exit(0);
 /* USER CODE END */
 }

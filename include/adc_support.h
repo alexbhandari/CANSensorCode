@@ -17,10 +17,10 @@
 
 /* ADC Interface Functions */
 int adc_convert_all_channels();
-int adc_convert_channel(uint16_t channel);
+int adc_convert_channel(uint16_t channel, adcData_t *adc_data_ptr);
 void adcGetSingleData(adcBASE_t *adc, unsigned group, adcData_t *data);
 void adcStartConversion_selChn(adcBASE_t *adc, unsigned channel, unsigned fifo_size, unsigned group);
-float decode_10_bit(int value);
-float decode_12_bit(int value);
+float adc_decode(adcBASE_t *adc, int value);
+void string_concat(char* str1, const char* format, ...);
 
 #endif /* INCLUDE_ADC_SUPPORT_H_ */
