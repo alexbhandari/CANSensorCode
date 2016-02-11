@@ -11,34 +11,43 @@
  * @fn int adc_conversion_helper(uint16_t channel)
  * @brief Runs an ADC conversion and prints the result
  */
-int adc_convert_all_channels() { //NOT WORKING
-	adcData_t adc_data[16];
-	adcData_t *adc_data_ptr = &adc_data;
-
-	adcStartConversion(adcREG1, adcGROUP1);
-
- 	/** - Wait for ADC Group1 conversion to complete */
- 	while(!adcIsConversionComplete(adcREG1, adcGROUP1));
-
-	/** - Read the conversion result
-	*     The data contains the Ambient Light sensor data
-    */
-	int count = 0;
-	count = adcGetData(adcREG1, adcGROUP1, adc_data_ptr);
-	adcData_t *ptr = adc_data_ptr;
-	char str[1600];
-	//printf("data: %ld. voltage: %f. id: %ld. Count: %d\r\n",adc_data_ptr->value,adc_decode(adcREG1, adc_data_ptr->value),adc_data_ptr->id,count);
+//int adc_convert_all_channels() { //NOT WORKING
+//	adcData_t adc_data[16];
+//	adcData_t *adc_data_ptr = &adc_data;
+//
+//	adcStartConversion(adcREG1, adcGROUP1);
+//
+// 	/** - Wait for ADC Group1 conversion to complete */
+// 	while(!adcIsConversionComplete(adcREG1, adcGROUP1));
+//
+//	/** - Read the conversion result
+//	*     The data contains the Ambient Light sensor data
+//    */
+//	int count = 0;
+//	count = adcGetData(adcREG1, adcGROUP1, adc_data_ptr);
+//	adcData_t *ptr = adc_data_ptr;
+//	char str[1600];
+//	//printf("data: %ld. voltage: %f. id: %ld. Count: %d\r\n",adc_data_ptr->value,adc_decode(adcREG1, adc_data_ptr->value),adc_data_ptr->id,count);
+//	int i;
+//	for(i = 9U; i < 10U; i++) {
+//		uint16 id = adc_data[i].id;
+//		unsigned int value = (unsigned int)adc_data[i].value;
+//		adc_data_ptr++;
+//		//printf("data: %ld. voltage: %f. id: %ld.\r\n", value, adc_decode(adcREG1, value), id);
+//		//string_concat(str, " %d \r\n", adc_decode(value));
+//	}
+//	printf(str);
+//	return count;
+//}
+void adc_convert_all_channels(adcData_t *ptr) {
 	int i;
-	for(i = 9U; i < 10U; i++) {
-		uint16 id = adc_data[i].id;
-		unsigned int value = (unsigned int)adc_data[i].value;
-		adc_data_ptr++;
-		//printf("data: %ld. voltage: %f. id: %ld.\r\n", value, adc_decode(adcREG1, value), id);
-		//string_concat(str, " %d \r\n", adc_decode(value));
+	int AD_CHANNELS[16] = {0U,1U,2U,3U,4U,5U,6U,7U,8U,9U,10U,11U,16U,17U,20U,21U};
+	for(i = 0U; i < sizeof(AD_CHANNELS)/sizeof(AD_CHANNELS[0]); i++) {
+		adc_convert_channel(AD_CHANNELS[i], ptr);
+		ptr ++;
 	}
-	printf(str);
-	return count;
 }
+
 
 /**
  * @fn int adc_conversion_helper(uint16_t channel)

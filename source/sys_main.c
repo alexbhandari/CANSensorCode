@@ -93,47 +93,13 @@ void main(void)
 
 	//ADC stuff
 	adcInit();
-//		adcStartConversion_selChn(adcREG1, 9U, 1, adcGROUP1);
-//		while(!adcIsConversionComplete(adcREG1, adcGROUP1));
-//		adcData_t adc_data;
-//		adcData_t *adc_data_ptr = &adc_data;
-//		int count = adcGetData(adcREG1,adcGROUP1,adc_data_ptr);
-//		printf("data: %d. Count: %d\r\n",adc_data,count);
 	adcData_t adc_data[16];
-	adcData_t *ptr = &adc_data;
-//	char output[500];
+	adcData_t *ptr = &adc_data[0];
 	int j;
 	while(1) {
 	for(j=0U;j<15000;j++){
-//		int j;
-//		for(j = 0;j<20;j++){
-		int i;
-		int AD_CHANNELS[16] = {0U,1U,2U,3U,4U,5U,6U,7U,8U,9U,10U,11U,16U,17U,20U,21U};
-		for(i = 0U; i < sizeof(AD_CHANNELS)/sizeof(AD_CHANNELS[0]); i++) {
-			adc_convert_channel(AD_CHANNELS[i], ptr);
-			ptr ++;
-		}
-//		adc_convert_all_channels();
-//		//printf("base: %d\r\n",&adc_data);
-//		//printf("prt:  %d\r\n",ptr);
-//		ptr = &adc_data;
-//		for(i = 0U; i < sizeof(AD_CHANNELS)/sizeof(AD_CHANNELS[0]); i++) {
-//			int id = ptr->id;
-//			int value = ptr->value;
-//			ptr++;
-//			//printf("address: %d\r\n",&ptr);
-//			//printf("data: %ld. voltage: %f. id: %ld.\r\n", value, adc_decode(adcREG1, value), id);
-//			strcat(output, " ");
-//			strcat(output, value);
-//			strcat(output, " ");
-//		}
-//		strcat(output,"\r\n");
-//		}
-//		printf(output);
-
+		adc_convert_all_channels(ptr);
 	}
-	j++;
-	printf("hi");
 	}
     //exit(0);
 /* USER CODE END */
