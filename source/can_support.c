@@ -27,7 +27,7 @@ void can_transmit_recieve() {
       sciSend(scilinREG, 1, (unsigned char *)*tx_ptr);
       printf("Transmitting: %d",*tx_ptr);
       while(tx_done == 0){};  /* ... wait until transmit request is through        */
-      tx_dome = 0;
+      tx_done = 0;
       sciSend(scilinREG, 7, (unsigned char *)" - done");
       sciSend(scilinREG, 2, (unsigned char *)"\r\n");
       printf(" - done\r\n");
