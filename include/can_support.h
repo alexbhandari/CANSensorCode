@@ -13,7 +13,7 @@
 #include "sci.h"
 #include "stdlib.h"
 
-#define D_COUNT  8
+#define D_COUNT  16
 
 /* CAN Interface */
 void can_transmit_recieve();

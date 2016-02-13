@@ -19,14 +19,15 @@ void can_transmit_recieve() {
 	int cnt;
     for(cnt=0;cnt<D_COUNT;cnt++)
     {
-      canTransmit(canREG1, canMESSAGE_BOX1, tx_ptr); /* transmitting 8 different chunks 1 by 1 */
+      canTransmit(canREG1, canMESSAGE_BOX1, tx_ptr); /* transmitting 16 different chunks 1 by 1 */
       unsigned int value = (unsigned int)*tx_ptr;
       char buffer[8];
       unsigned int num_char = ltoa(value,(char *)buffer);
       sciSend(scilinREG, 14, (unsigned char *)"Transmitting: ");
       sciSend(scilinREG, 1, (unsigned char *)*tx_ptr);
       printf("Transmitting: %d",*tx_ptr);
-      //while(tx_done == 0){};                 /* ... wait until transmit request is through        */
+      while(tx_done == 0){};  /* ... wait until transmit request is through        */
+      tx_dome = 0;
       sciSend(scilinREG, 7, (unsigned char *)" - done");
       sciSend(scilinREG, 2, (unsigned char *)"\r\n");
       printf(" - done\r\n");
@@ -70,4 +71,24 @@ void dumpSomeData()
         tmp = *dptr++;
         *dptr = tmp + 0x11;
      }
+}
+
+/* can interrupt notification */
+void canMessageNotification(canBASE_t *node, uint32 messageBox)
+{
+     /* node 1 - transfer request */
+     if(node==canREG1)
+     {
+       tx_done=1; /* confirm transfer request */
+     }
+
+     /* node 2 - receive complete */
+     if(node==canREG2)
+     {
+      while(!canIsRxMessageArrived(canREG2, canMESSAGE_BOX1));
+      canGetData(canREG2, canMESSAGE_BOX1, rx_ptr); /* copy to RAM */
+      rx_ptr +=8;
+     }
+
+    /* Note: since only message box 1 is used on both nodes we dont check it here.*/
 }
