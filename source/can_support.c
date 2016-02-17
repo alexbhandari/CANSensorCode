@@ -7,19 +7,43 @@
 
 #include "can_support.h"
 
-uint32 cnt=0, error =0, tx_done =0;
+uint32 cnt=0; error =0, tx_done =0;
 uint8 tx_data[D_COUNT][8] = {0,1,2,3,4,5,6,7};
 uint8 rx_data[D_COUNT][8] = {0};
-uint8 *tx_ptr = &tx_data[0][0];
+uint8 *tx_ptr;
 uint8 *rx_ptr = &rx_data[0][0];
 uint8 *dptr=0;
 
-void can_transmit_recieve() {
+void can_transmit_recieve(canBASE_t *node, uint32 messageBox, uint8 * tx_data[D_COUNT][8]) {
     /** - starting transmission */
-	int cnt;
+	tx_ptr = &tx_data[0][0];
+	sendMessage(messageBox);
+
+    /** - check the received data with the one that was transmitted */
+    tx_ptr = &tx_data[0][0];
+    rx_ptr = &rx_data[0][0];
+    sciSend(scilinREG, 10, (unsigned char *)"Recieved: ");
+    for(cnt=0;cnt<D_COUNT;cnt++) {
+          if(*tx_ptr++ != *rx_ptr++)
+          {
+               error++; /* data error */
+               sciSend(scilinREG, 7, (unsigned char *)"error\r\n");
+          }
+          else {
+              unsigned int value = (unsigned int)*rx_ptr;
+              char buffer[8];
+              unsigned int num_char = ltoa(value,(char *)buffer);
+              sciSend(scilinREG, 1, (unsigned char *)*rx_ptr);
+          }
+    }
+    //sciSend(scilinREG, 2, (unsigned char *)"\r\n");
+    //sciSend(scilinREG, 10, (unsigned char *)"Finished\r\n");
+}
+
+void sendMessage(uint32 messageBox) {
     for(cnt=0;cnt<D_COUNT;cnt++)
     {
-      canTransmit(canREG1, canMESSAGE_BOX1, tx_ptr); /* transmitting 16 different chunks 1 by 1 */
+      canTransmit(canREG1, messageBox, tx_ptr); /* transmitting 8 bytes, byte by byte */
       unsigned int value = (unsigned int)*tx_ptr;
       char buffer[8];
       unsigned int num_char = ltoa(value,(char *)buffer);
@@ -34,27 +58,6 @@ void can_transmit_recieve() {
       tx_done=0;
       tx_ptr +=8;    /* next chunk ...*/
     }
-
-    /** - check the received data with the one that was transmitted */
-    tx_ptr = &tx_data[0][0];
-    rx_ptr = &rx_data[0][0];
-    sciSend(scilinREG, 10, (unsigned char *)"Recieved: ");
-    for(cnt=0;cnt<63;cnt++)
-    {
-          if(*tx_ptr++ != *rx_ptr++)
-          {
-               error++; /* data error */
-               sciSend(scilinREG, 7, (unsigned char *)"error\r\n");
-          }
-          else {
-              unsigned int value = (unsigned int)*rx_ptr;
-              char buffer[8];
-              unsigned int num_char = ltoa(value,(char *)buffer);
-              sciSend(scilinREG, 1, (unsigned char *)*rx_ptr);
-          }
-    }
-    sciSend(scilinREG, 2, (unsigned char *)"\r\n");
-    sciSend(scilinREG, 10, (unsigned char *)"Finished\r\n");
 }
 
 /* writing some data to ram  */

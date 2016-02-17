@@ -13,10 +13,11 @@
 #include "sci.h"
 #include "stdlib.h"
 
-#define D_COUNT  16
+#define D_COUNT  8
 
 /* CAN Interface */
-void can_transmit_recieve();
+void can_transmit_recieve(canBASE_t *node, uint32 messageBox, uint8 * tx_data[D_COUNT][8]);
+void sendByte(uint32 messageBox);
 void dumpSomeData();
 
 #endif /* INCLUDE_CAN_SUPPORT_H_ */

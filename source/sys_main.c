@@ -52,7 +52,6 @@
 /* USER CODE BEGIN (1) */
 #include "main.h"
 
-void dumpSomeData();
 /* USER CODE END */
 
 /** @fn void main(void)
@@ -66,8 +65,7 @@ void dumpSomeData();
 /* USER CODE BEGIN (2) */
 /* USER CODE END */
 
-void main(void)
-{
+void main(void) {
 /* USER CODE BEGIN (3) */
 
 	/* Initialize sci for communication over USB */
@@ -96,10 +94,19 @@ void main(void)
 	adcData_t adc_data[16];
 	adcData_t *ptr = &adc_data[0];
 	int j;
+	uint8 tx_data[D_COUNT][8];
+	uint8 *tx_ptr = &tx_data[0][0];
 	while(1) {
-	for(j=0U;j<15000;j++){
-		adc_convert_all_channels(ptr);
-	}
+		for(j=0U;j<15000;j++){
+			adc_convert_all_channels(ptr);
+			int i;
+			for(i=0;i<sizeof(adc_data)/sizeof(adc_data[0]);i++) {
+				can_transmit_recieve(canREG1, canMESSAGE_BOX1, &adc_data[i]);
+			}
+		}
+		//for(i=0;i<sizeof(tx_data)/sizeof(tx_data[0]);i++) {
+		//	can_transmit_recieve(canREG1, canMESSAGE_BOX1, &tx_data[i]);
+		//}
 	}
     //exit(0);
 /* USER CODE END */
